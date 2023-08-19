@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>GETで送る</h1>
+    <form action="/form_get" method="GET">
+        <ul>
+            <li>
+                <label for="name">ユーザー名</label>
+                <input type="text" id="name" name="username" />
+            </li>
+            <li>
+                <label for="age">年齢</label>
+                <input type="text" id="age" name="age" />
+            </li>
+            <li class="button">
+                <button type="submit">送信</button>
+            </li>
+        </ul>
+    </form>
+
+    <h1>POSTで送る</h1>
+    <form action="/form_post" method="POST">
+        <ul>
+            <li>
+                <label for="name">ユーザー名</label>
+                <input type="text" id="name" name="username" />
+            </li>
+            <li>
+                <label for="age">年齢</label>
+                <input type="text" id="age" name="age" />
+            </li>
+            <li class="button">
+                <button type="submit">送信</button>
+            </li>
+        </ul>
+    </form>
+</body>
