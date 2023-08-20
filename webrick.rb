@@ -1,5 +1,15 @@
 # webrick.rb
 require 'webrick'
+require 'erb'
+
+foods = [
+  { id: 1, name: "りんご", category: "fruits" },
+  { id: 2, name: "バナナ", category: "fruits" },
+  { id: 3, name: "いちご", category: "fruits" },
+  { id: 4, name: "トマト", category: "vegetables" },
+  { id: 5, name: "キャベツ", category: "vegetables" },
+  { id: 6, name: "レタス", category: "vegetables" }
+]
 
 server = WEBrick::HTTPServer.new({ 
   :DocumentRoot => './',
@@ -41,16 +51,20 @@ server.mount_proc("/form_post") do |req, res|
   res.body = body
 end
 
-require "erb" # erbをrequireする記述が必要
-
-# erb を使うにはこういった記述が必要。理解する必要はありません。このまま使いましょう。
 WEBrick::HTTPServlet::FileHandler.add_handler("erb", WEBrick::HTTPServlet::ERBHandler)
 server.config[:MimeTypes]["erb"] = "text/html"
 
 server.mount_proc("/hello") do |req, res|
   template = ERB.new( File.read('hello.erb') )
-  # 現在時刻についてはインスタンス変数をここで定義してみるといいかも？
   @time = Time.now
+  res.body << template.result( binding )
+end
+
+server.mount_proc("/foods") do |req, res|
+  template = ERB.new( File.read('./foods/index.erb') )
+  req.query
+  @selected_category = req.query["category"]
+  @foods = foods.filter{ |food| food[:category] == @selected_category || @selected_category == "all"}
   res.body << template.result( binding )
 end
 

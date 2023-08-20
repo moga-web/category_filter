@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Foods一覧</h1>
+    <div class="foods-select">
+        <form action="/foods" method="POST">
+            <select name="category">
+                <option value="all" selected>全て</option>
+                <option value="fruits">フルーツ</option>
+                <option value="vegetables">野菜</option>
+            </select>
+            <button type="search">検索</button>
+        </form>
+    </div>
+    <ul>
+        <% @foods.each do |food| %> 
+        <li><%= food[:name] %></li>
+        <% end %>
+    </ul>
+</body>
