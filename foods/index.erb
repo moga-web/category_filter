@@ -8,9 +8,9 @@
     <div class="foods-select">
         <form action="/foods" method="POST">
             <select name="category">
-                <option value="all" selected>全て</option>
-                <option value="fruits">フルーツ</option>
-                <option value="vegetables">野菜</option>
+                <option value="all" <% if @selected_category == "all" %>selected<% end %>>全て</option>
+                <option value="fruits" <% if @selected_category == "fruits" %>selected<% end %>>フルーツ</option>
+                <option value="vegetables" <% if @selected_category == "vegetables" %>selected<% end %>>野菜</option>
             </select>
             <button type="search">検索</button>
         </form>
